@@ -1,0 +1,78 @@
+body {
+  font-family: "Comic Sans MS", "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.center {
+  margin-top: 10%;
+}
+
+h1, h2, h3 {
+  color: #ff6600;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+button {
+  background-color: #ffb347;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background-color: #ffd166;
+}
+
+#answers button {
+  display: block;
+  margin: 8px auto;
+  width: 60%;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin: 20px auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+}
+
+#image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 400px;
+}
+
+#image-grid img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  opacity: 0.3;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#image-grid img.unlocked {
+  opacity: 1;
+}
+
+#error {
+  color: red;
+  margin-top: 10px;
+}

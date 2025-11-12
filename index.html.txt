@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎮 Entdecke Goonyas – das verrückte Sammelspiel!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="login-screen" class="center">
+    <h1>🎮 Entdecke Goonyas!</h1>
+    <p>Gib den Zugangscode ein, um das Spiel zu starten:</p>
+    <input type="password" id="access-code" placeholder="Zugangscode eingeben..." />
+    <button id="login-btn">Starten</button>
+    <p id="error" class="hidden">❌ Falscher Code!</p>
+  </div>
+
+  <div id="game-screen" class="hidden">
+    <header>
+      <h2>🎮 Entdecke Goonyas – das verrückte Sammelspiel!</h2>
+      <p>Schalte neue Szenen, Orte und Charaktere frei und finde alle geheimen Bilder! 🌴✨</p>
+    </header>
+
+    <div id="question-area" class="card">
+      <h3 id="question">Frage wird geladen...</h3>
+      <div id="answers"></div>
+    </div>
+
+    <div id="progress-area">
+      <h4>Deine Sammlung:</h4>
+      <div id="image-grid"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

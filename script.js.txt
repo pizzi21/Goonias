@@ -1,0 +1,85 @@
+const PASSWORD = "Goonias.com";
+const TOTAL_LEVELS = 50;
+const IMAGES = [
+  "🦊", "🐨", "🦜", "🐘", "🐧"
+];
+
+const QUESTIONS = Array.from({length: TOTAL_LEVELS}, (_, i) => ({
+  question: Frage ${i+1}: Was ist die richtige Antwort?,
+  answers: ["Antwort A", "Antwort B", "Antwort C", "Antwort D"],
+  correct: Math.floor(Math.random() * 4)
+}));
+
+let currentLevel = parseInt(localStorage.getItem("goonyas_level")) || 0;
+let unlockedImages = JSON.parse(localStorage.getItem("goonyas_images")) || [];
+
+const loginBtn = document.getElementById("login-btn");
+const accessInput = document.getElementById("access-code");
+const errorText = document.getElementById("error");
+
+const loginScreen = document.getElementById("login-screen");
+const gameScreen = document.getElementById("game-screen");
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const imageGrid = document.getElementById("image-grid");
+
+// Passwortprüfung
+loginBtn.addEventListener("click", () => {
+  if (accessInput.value.trim() === PASSWORD) {
+    loginScreen.classList.add("hidden");
+    gameScreen.classList.remove("hidden");
+    loadQuestion();
+    renderImages();
+  } else {
+    errorText.classList.remove("hidden");
+  }
+});
+
+function loadQuestion() {
+  if (currentLevel >= TOTAL_LEVELS) {
+    questionEl.textContent = "🎉 Glückwunsch! Du hast alle Level geschafft!";
+    answersEl.innerHTML = "";
+    return;
+  }
+
+  const q = QUESTIONS[currentLevel];
+  questionEl.textContent = q.question;
+  answersEl.innerHTML = "";
+
+  q.answers.forEach((ans, idx) => {
+    const btn = document.createElement("button");
+    btn.textContent = ans;
+    btn.onclick = () => checkAnswer(idx === q.correct);
+    answersEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(correct) {
+  if (correct) {
+    currentLevel++;
+    localStorage.setItem("goonyas_level", currentLevel);
+
+    if (currentLevel % 10 === 0 && unlockedImages.length < IMAGES.length) {
+      unlockedImages.push(IMAGES[unlockedImages.length]);
+      localStorage.setItem("goonyas_images", JSON.stringify(unlockedImages));
+      renderImages();
+    }
+
+    loadQuestion();
+  } else {
+    alert("❌ Falsch! Versuch's nochmal!");
+  }
+}
+
+function renderImages() {
+  imageGrid.innerHTML = "";
+  IMAGES.forEach(img => {
+    const el = document.createElement("div");
+    el.style.fontSize = "50px";
+    el.textContent = img;
+    el.classList.add("card");
+    if (unlockedImages.includes(img)) el.classList.add("unlocked");
+    imageGrid.appendChild(el);
+  });
+}
